@@ -25,8 +25,6 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 public class IndexController {
-
-
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -36,73 +34,63 @@ public class IndexController {
     @Autowired
     CityService cityService;
 
-//    @Autowired
+    //    @Autowired
     StringRedisTemplate redisTemplate;
 
     @ResponseBody
     @PostMapping("/city")
-    public City saveCity(City city){
-
+    public City saveCity(City city) {
         cityService.saveCity(city);
         return city;
     }
 
     @ResponseBody
     @GetMapping("/city")
-    public City getCityById(@RequestParam("id") Long id){
+    public City getCityById(@RequestParam("id") Long id) {
         return cityService.getById(id);
     }
 
     @ResponseBody
     @GetMapping("/acct")
-    public Account getById(@RequestParam("id") Long id){
-
+    public Account getById(@RequestParam("id") Long id) {
         return accountService.getAcctByid(id);
     }
 
-
     @ResponseBody
     @GetMapping("/sql")
-    public String queryFromDb(){
+    public String queryFromDb() {
         Long aLong = jdbcTemplate.queryForObject("select count(*) from account_tbl", Long.class);
         return aLong.toString();
     }
 
     /**
      * 来登录页
-     * @return
      */
-    @GetMapping(value = {"/","/login"})
-    public String loginPage(){
-
+    @GetMapping(value = {"/", "/login"})
+    public String loginPage() {
         return "login";
     }
 
-
     @PostMapping("/login")
-    public String main(User user, HttpSession session, Model model){ //RedirectAttributes
-
-        if(StringUtils.hasLength(user.getUserName()) && "123456".equals(user.getPassword())){
+    public String main(User user, HttpSession session, Model model) { //RedirectAttributes
+        if (StringUtils.hasLength(user.getUserName()) && "123456".equals(user.getPassword())) {
             //把登陆成功的用户保存起来
-            session.setAttribute("loginUser",user);
+            session.setAttribute("loginUser", user);
             //登录成功重定向到main.html;  重定向防止表单重复提交
             return "redirect:/main.html";
-        }else {
-            model.addAttribute("msg","账号密码错误");
+        } else {
+            model.addAttribute("msg", "账号密码错误");
             //回到登录页面
             return "login";
         }
-
     }
 
     /**
      * 去main页面
-     * @return
      */
     @GetMapping("/main.html")
-    public String mainPage(HttpSession session,Model model){
-
-        log.info("当前方法是：{}","mainPage");
+    public String mainPage(HttpSession session, Model model) {
+        log.info("当前方法是：{}", "mainPage");
         //是否登录。  拦截器，过滤器
 //        Object loginUser = session.getAttribute("loginUser");
 //        if(loginUser != null){
@@ -117,12 +105,8 @@ public class IndexController {
 //
 //        String s = opsForValue.get("/main.html");
 //        String s1 = opsForValue.get("/sql");
-//
-//
 //        model.addAttribute("mainCount",s);
 //        model.addAttribute("sqlCount",s1);
-
         return "main";
-
     }
 }

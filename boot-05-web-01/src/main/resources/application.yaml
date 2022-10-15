@@ -6,14 +6,19 @@ spring:
     contentnegotiation:
       favor-parameter: true
   #  mvc:
-#    static-path-pattern: /res/**
-
-  resources:
-    static-locations: [classpath:/haha/]
-    add-mappings: true
-    cache:
-      period: 11000
-server:
-  servlet:
-    context-path: /world
-
+  #    static-path-pattern: /res/**
+  #  resources:
+  #    static-locations: [ classpath:/haha/ ]
+  #    add-mappings: true
+  #    cache:
+  #      period: 11000
+  web:
+    resources:
+      static-locations: [ classpath:/haha/ ]
+      #Whether to enable default resource handling.
+      add-mappings: true
+      cache:
+        period: 11000
+#server:
+#  servlet:
+#    context-path: /world
