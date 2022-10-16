@@ -28,6 +28,10 @@ import java.util.*;
 
 @Configuration(proxyBeanMethods = false)
 public class WebConfig /*implements WebMvcConfigurer*/ {
+    /**
+     * 修改了Spring MVC默认的 _method 属性
+     * 自己定义了 HiddenHttpMethodFilter 这个Bean 之后，Spring Boot 默认就不会定义了
+     */
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         HiddenHttpMethodFilter methodFilter = new HiddenHttpMethodFilter();

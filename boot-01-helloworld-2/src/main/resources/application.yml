@@ -13,6 +13,7 @@ person:
   #  score:
   #    english: 80
   #    math: 90
+  #上面的 Map 写法可以简化为这样的
   score: { english:80,math:90 }
   salarys:
     - 9999.98

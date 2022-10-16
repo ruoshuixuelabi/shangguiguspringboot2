@@ -1,6 +1,4 @@
 package com.atguigu.boot.controller;
-
-
 import com.atguigu.boot.bean.Person;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,21 +6,15 @@ import javax.servlet.http.Cookie;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @RestController
 public class ParameterTestController {
-
     /**
      * 数据绑定：页面提交的请求数据（GET、POST）都可以和对象属性进行绑定
-     *
-     * @param person
-     * @return
      */
     @PostMapping("/saveuser")
     public Person saveuser(Person person) {
         return person;
     }
-
     //  car/2/owner/zhangsan
     @GetMapping("/car/{id}/owner/{username}")
     public Map<String, Object> getCar(@PathVariable("id") Integer id,
@@ -65,8 +57,8 @@ public class ParameterTestController {
      */
     @GetMapping("/cars/{path}")
     public Map<String, Object> carsSell(@MatrixVariable("low") Integer low,
-                        @MatrixVariable("brand") List<String> brand,
-                        @PathVariable("path") String path) {
+                                        @MatrixVariable("brand") List<String> brand,
+                                        @PathVariable("path") String path) {
         Map<String, Object> map = new HashMap<>();
         map.put("low", low);
         map.put("brand", brand);
