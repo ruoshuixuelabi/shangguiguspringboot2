@@ -17,27 +17,21 @@ import static org.junit.jupiter.api.Assertions.*;
  * @BootstrapWith(SpringBootTestContextBootstrapper.class)
  * @ExtendWith(SpringExtension.class)
  */
-//@SpringBootTest
+@SpringBootTest
 @DisplayName("junit5功能测试类")
 public class Junit5Test {
-
-
     @Autowired
     JdbcTemplate jdbcTemplate;
-
 
     /**
      * 测试前置条件
      */
     @DisplayName("测试前置条件")
     @Test
-    void testassumptions(){
-        Assumptions.assumeTrue(false,"结果不是true");
+    void testassumptions() {
+        Assumptions.assumeTrue(false, "结果不是true");
         System.out.println("111111");
-
     }
-
-
 
     /**
      * 断言：前面断言失败，后面的代码都不会执行
@@ -51,7 +45,6 @@ public class Junit5Test {
         Object obj1 = new Object();
         Object obj2 = new Object();
         assertSame(obj1, obj2, "两个对象不一样");
-
     }
 
     @Test
@@ -69,14 +62,12 @@ public class Junit5Test {
         assertAll("test",
                 () -> assertTrue(true && true, "结果不为true"),
                 () -> assertEquals(1, 2, "结果不是1"));
-
         System.out.println("=====");
     }
 
     @DisplayName("异常断言")
     @Test
     void testException() {
-
         //断定业务逻辑一定出现异常
         assertThrows(ArithmeticException.class, () -> {
             int i = 10 / 2;
@@ -85,14 +76,12 @@ public class Junit5Test {
 
     @DisplayName("快速失败")
     @Test
-    void testFail(){
+    void testFail() {
         //xxxxx
-        if(1 == 2){
+        if (1 == 2) {
             fail("测试失败");
         }
-
     }
-
 
     int cal(int i, int j) {
         return i + j;
@@ -120,15 +109,12 @@ public class Junit5Test {
 
     /**
      * 规定方法超时时间。超出时间测试出异常
-     *
-     * @throws InterruptedException
      */
     @Timeout(value = 500, unit = TimeUnit.MILLISECONDS)
     @Test
     void testTimeout() throws InterruptedException {
         Thread.sleep(600);
     }
-
 
     @BeforeEach
     void testBeforeEach() {
@@ -148,8 +134,5 @@ public class Junit5Test {
     @AfterAll
     static void testAfterAll() {
         System.out.println("所有测试以及结束了...");
-
     }
-
-
 }
